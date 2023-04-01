@@ -1,9 +1,8 @@
-// Requiring the client to connect with the database
-require("./database/client");
-const client = require("./database/client");
-
 // Importing dotenv so we are able to have a .env file and save secret information
 require("dotenv").config();
+
+// Requiring the client to connect with the database
+require("./database/client");
 
 // Importing express to the application
 const express = require("express");
