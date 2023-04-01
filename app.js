@@ -23,9 +23,11 @@ const PORT = process.env.PORT || 8001;
 
 // Requiring offer router to be used here
 const offers = require("./routers/offersRouter");
+const user = require("./routers/userRouter");
 
 app.use(bodyParser.json());
 app.use("/offers", offers);
+app.use("/user", user)
 
 // Initializing the server
 app.listen(PORT, () => {
