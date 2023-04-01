@@ -36,10 +36,6 @@ const OfferSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  endAvailableDate: {
-    type: Date,
-    required: true,
-  },
   offerSize: {
     type: String,
     required: true,
