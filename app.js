@@ -12,7 +12,10 @@ const app = express();
 
 const morgan = require("morgan");
 
+const cors = require("cors");
+
 app.use(morgan("combined"));
+app.use(cors());
 
 // Importing bodyParser so we are able to use json format
 const bodyParser = require("body-parser");
