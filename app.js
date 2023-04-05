@@ -1,6 +1,3 @@
-// Importing dotenv so we are able to have a .env file and save secret information
-require("dotenv").config();
-
 // Requiring the client to connect with the database
 require("./database/client");
 
@@ -22,9 +19,12 @@ const PORT = process.env.PORT || 8001;
 
 // Requiring offer router to be used here
 const offers = require("./routers/offersRouter");
+// Requiring booking router to be used here
+const booking = require("./routers/bookingRouter");
 
 app.use(bodyParser.json());
 app.use("/offers", offers);
+app.use("/booking", booking);
 
 // Initializing the server
 app.listen(PORT, () => {
