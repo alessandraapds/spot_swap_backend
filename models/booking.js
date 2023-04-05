@@ -2,23 +2,22 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
 const bookingSchema = new mongoose.Schema({
-// user_id,spot_id ,start_time, end_time, booking_status,total_cost
-
+  // user_id,spot_id ,start_time, end_time, booking_status,total_cost
 
   user_id: {
-     type: ObjectId,
-    required: true,
+    type: ObjectId,
+    required: false,
   },
   spot_id: {
-     type: ObjectId,
-    required: true,
+    type: ObjectId,
+    required: false,
   },
   start_time: {
-    type: Number,
-    required: true,
+    type: Date,
+    required: false,
   },
   end_time: {
-    type: Number,
+    type: Date,
     required: true,
   },
   booking_status: {
@@ -29,7 +28,6 @@ const bookingSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-   
 });
 
 const booking = mongoose.model("booking", bookingSchema);
