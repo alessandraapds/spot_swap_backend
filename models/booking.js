@@ -6,11 +6,11 @@ const bookingSchema = new mongoose.Schema({
 
   user_id: {
     type: ObjectId,
-    required: false,
+    required: true,
   },
   spot_id: {
     type: ObjectId,
-    required: false,
+    required: true,
   },
   start_time: {
     type: Date,
