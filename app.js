@@ -14,7 +14,7 @@ const app = express();
 const morgan = require("morgan");
 
 app.use(morgan("combined"));
-
+const cors = require('cors');
 // Importing bodyParser so we are able to use json format
 const bodyParser = require("body-parser");
 
@@ -24,10 +24,12 @@ const PORT = process.env.PORT || 8001;
 // Requiring offer router to be used here
 const offers = require("./routers/offersRouter");
 const user = require("./routers/userRouter");
-
+app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 app.use("/offers", offers);
-app.use("/user", user)
+app.use("/user", user);
 
 // Initializing the server
 app.listen(PORT, () => {
