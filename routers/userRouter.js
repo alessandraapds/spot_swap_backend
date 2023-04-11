@@ -39,7 +39,8 @@ router.post("/login", (req, res) => {
                 }
                 const token = generateToken({username: user.username})
                 const id = user.id;
-            res.json({token, id})
+                const name = user.firstName
+            res.json({token, id, name})
             console.log(user.id)
             })
         })
