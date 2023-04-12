@@ -9,7 +9,10 @@ const app = express();
 
 const morgan = require("morgan");
 
+const cors = require("cors");
+
 app.use(morgan("combined"));
+app.use(cors());
 
 // Importing bodyParser so we are able to use json format
 const bodyParser = require("body-parser");
@@ -23,9 +26,14 @@ const offers = require("./routers/offersRouter");
 // Requiring booking router to be used here
 const booking = require("./routers/bookingRouter");
 
+const user = require("./routers/userRouter");
+app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 app.use("/offers", offers);
 app.use("/booking", booking);
+app.use("/user", user);
 
 // Initializing the server
 app.listen(PORT, () => {
