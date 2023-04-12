@@ -3,20 +3,28 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
+<<<<<<< HEAD
+    "start": "node app.js",
+    "dev": "node --require dotenv/config --watch app.js"
+=======
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
+>>>>>>> origin/main
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+<<<<<<< HEAD
+=======
     "dotenv": "^16.0.3",
+>>>>>>> origin/main
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "dotenv": "^16.0.3"
   }
 }
