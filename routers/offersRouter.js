@@ -31,29 +31,23 @@ offers.get("/:id", (req, res) => {
 offers.post("/", (req, res) => {
   const {
     offerName,
-    latitude,
-    longitude,
     street,
     city,
-    postalCode,
-    startAvailableDate,
-    endAvailableDate,
+    country,
     offerSize,
-    pricePerHour,
-    isAvailable,
+    price,
+    availableFrom,
+    availableUntil,
   } = req.body;
   Offer.create({
     offerName,
-    latitude,
-    longitude,
     street,
     city,
-    postalCode,
-    startAvailableDate,
-    endAvailableDate,
+    country,
     offerSize,
-    pricePerHour,
-    isAvailable,
+    price,
+    availableFrom,
+    availableUntil,
   })
     .then((data) => res.json(data))
     .catch((e) => {
