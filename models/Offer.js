@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
 const OfferSchema = new mongoose.Schema({
-  // userId, offerName, street, city, country, offerSize, price, availableFrom, availableUntil
+  // userId, offerName, street, city, country, offerSize, price, availableFrom, availableUntil, isAvailable, createdAt
 
   userId: {
     type: ObjectId,
@@ -37,6 +37,14 @@ const OfferSchema = new mongoose.Schema({
     required: true,
   },
   availableUntil: {
+    type: Date,
+    required: true,
+  },
+  isAvailable: {
+    type: Boolean,
+    required: true,
+  },
+  createdAt: {
     type: Date,
     required: true,
   },
