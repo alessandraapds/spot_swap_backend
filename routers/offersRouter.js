@@ -5,7 +5,8 @@ const Offer = require("../models/Offer");
 
 //GET Create an endpoint to retrieve all offers
 offers.get("/", (req, res) => {
-  Offer.find({})
+  Offer.find({ isAvailable: true })
+    .sort({ createdAt: -1 })
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
 });
@@ -39,6 +40,8 @@ offers.post("/", (req, res) => {
     price,
     availableFrom,
     availableUntil,
+    isAvailable,
+    createdAt,
   } = req.body;
   Offer.create({
     userId,
@@ -50,6 +53,8 @@ offers.post("/", (req, res) => {
     price,
     availableFrom,
     availableUntil,
+    isAvailable,
+    createdAt,
   })
     .then((data) => res.json(data))
     .catch((e) => {
