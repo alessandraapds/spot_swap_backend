@@ -3,9 +3,17 @@ const offers = express.Router();
 const mongoose = require("mongoose");
 const Offer = require("../models/Offer");
 
-//GET Create an endpoint to retrieve all offers
+//GET Create an endpoint to retrieve all available offers
 offers.get("/", (req, res) => {
   Offer.find({ isAvailable: true })
+    .sort({ createdAt: -1 })
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err));
+});
+
+//GET Create an endpoint to retrieve all available and unavailable offers
+offers.get("/alloffers", (req, res) => {
+  Offer.find({})
     .sort({ createdAt: -1 })
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
