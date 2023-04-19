@@ -83,19 +83,17 @@ offers.delete("/:id", (req, res) => {
 //UPDATE/PUT Create an endpoint to update an offer based on id
 offers.put("/:id", (req, res) => {
   const id = req.params.id;
-  const { startAvailableDate, endAvailableDate, pricePerHour } = req.body;
+  const { isAvailable } = req.body;
   Offer.findByIdAndUpdate(
     id,
     {
-      startAvailableDate,
-      endAvailableDate,
-      pricePerHour,
+      isAvailable,
     },
     { new: true }
   )
     .then((data) => {
       if (!data) {
-        // Send 404 if no film is found with the specified _id
+        // Send 404 if offer is not found with the specified _id
         return res.sendStatus(404);
       }
       res.json(data);
@@ -105,5 +103,32 @@ offers.put("/:id", (req, res) => {
       res.sendStatus(404);
     });
 });
+
+
+//UPDATE/PUT Create an endpoint to update an offer based on id
+// offers.put("/:id", (req, res) => {
+//   const id = req.params.id;
+//   const { startAvailableDate, endAvailableDate, pricePerHour } = req.body;
+//   Offer.findByIdAndUpdate(
+//     id,
+//     {
+//       startAvailableDate,
+//       endAvailableDate,
+//       pricePerHour,
+//     },
+//     { new: true }
+//   )
+//     .then((data) => {
+//       if (!data) {
+//         // Send 404 if no film is found with the specified _id
+//         return res.sendStatus(404);
+//       }
+//       res.json(data);
+//     })
+//     .catch((e) => {
+//       console.log(e.message);
+//       res.sendStatus(404);
+//     });
+// });
 
 module.exports = offers;
