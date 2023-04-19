@@ -3,9 +3,17 @@ const offers = express.Router();
 const mongoose = require("mongoose");
 const Offer = require("../models/Offer");
 
-//GET Create an endpoint to retrieve all offers
+//GET Create an endpoint to retrieve all available offers
 offers.get("/", (req, res) => {
   Offer.find({ isAvailable: true })
+    .sort({ createdAt: -1 })
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err));
+});
+
+//GET Create an endpoint to retrieve all available and unavailable offers
+offers.get("/alloffers", (req, res) => {
+  Offer.find({})
     .sort({ createdAt: -1 })
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
@@ -80,20 +88,24 @@ offers.delete("/:id", (req, res) => {
     });
 });
 
-//UPDATE/PUT Create an endpoint to update an offer based on id
+
+
+// UPDATE/PUT Create an endpoint to update an offer based on id
 offers.put("/:id", (req, res) => {
   const id = req.params.id;
-  const { isAvailable } = req.body;
+  const { startAvailableDate, endAvailableDate, pricePerHour } = req.body;
   Offer.findByIdAndUpdate(
     id,
     {
-      isAvailable,
+      startAvailableDate,
+      endAvailableDate,
+      pricePerHour,
     },
     { new: true }
   )
     .then((data) => {
       if (!data) {
-        // Send 404 if offer is not found with the specified _id
+        // Send 404 if no film is found with the specified _id
         return res.sendStatus(404);
       }
       res.json(data);
@@ -103,32 +115,5 @@ offers.put("/:id", (req, res) => {
       res.sendStatus(404);
     });
 });
-
-
-//UPDATE/PUT Create an endpoint to update an offer based on id
-// offers.put("/:id", (req, res) => {
-//   const id = req.params.id;
-//   const { startAvailableDate, endAvailableDate, pricePerHour } = req.body;
-//   Offer.findByIdAndUpdate(
-//     id,
-//     {
-//       startAvailableDate,
-//       endAvailableDate,
-//       pricePerHour,
-//     },
-//     { new: true }
-//   )
-//     .then((data) => {
-//       if (!data) {
-//         // Send 404 if no film is found with the specified _id
-//         return res.sendStatus(404);
-//       }
-//       res.json(data);
-//     })
-//     .catch((e) => {
-//       console.log(e.message);
-//       res.sendStatus(404);
-//     });
-// });
 
 module.exports = offers;
