@@ -1,18 +1,13 @@
 {
-  "name": "spotswap",
+  "name": "nodepractice",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-
     "start": "node app.js",
     "dev": "node --require dotenv/config --watch app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-    "dev": "node --require dotenv/config --watch app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
-
-  },
-  "dependencies": {
+     },
+    "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
