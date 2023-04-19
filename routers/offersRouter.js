@@ -36,7 +36,7 @@ offers.get("/:id", (req, res) => {
     });
 });
 
-//UPDATE Create an endpoint to create a new offer
+//POST Create an endpoint to create a new offer
 offers.post("/", (req, res) => {
   const {
     userId,
@@ -93,13 +93,11 @@ offers.delete("/:id", (req, res) => {
 // UPDATE/PUT Create an endpoint to update an offer based on id
 offers.put("/:id", (req, res) => {
   const id = req.params.id;
-  const { startAvailableDate, endAvailableDate, pricePerHour } = req.body;
+  const { isAvailable } = req.body;
   Offer.findByIdAndUpdate(
     id,
     {
-      startAvailableDate,
-      endAvailableDate,
-      pricePerHour,
+      isAvailable,
     },
     { new: true }
   )
