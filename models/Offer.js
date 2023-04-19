@@ -1,19 +1,15 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 
 const OfferSchema = new mongoose.Schema({
-  // offerName, latitude, longitude, street, city, postalCode, startAvailableDate, endAvailableDate, offerSize,
-  // pricePerHour, isAvailable
+  // userId, offerName, street, city, country, offerSize, price, availableFrom, availableUntil, isAvailable, createdAt
 
+  userId: {
+    type: ObjectId,
+    required: true,
+  },
   offerName: {
     type: String,
-    required: true,
-  },
-  latitude: {
-    type: Number,
-    required: true,
-  },
-  longitude: {
-    type: Number,
     required: true,
   },
   street: {
@@ -24,28 +20,32 @@ const OfferSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  postalCode: {
-    type: Number,
-    required: true,
-  },
-  startAvailableDate: {
-    type: Date,
-    required: true,
-  },
-  endAvailableDate: {
-    type: Date,
+  country: {
+    type: String,
     required: true,
   },
   offerSize: {
     type: String,
     required: true,
   },
-  pricePerHour: {
+  price: {
     type: Number,
+    required: true,
+  },
+  availableFrom: {
+    type: Date,
+    required: true,
+  },
+  availableUntil: {
+    type: Date,
     required: true,
   },
   isAvailable: {
     type: Boolean,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
     required: true,
   },
 });

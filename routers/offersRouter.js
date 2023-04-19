@@ -3,9 +3,18 @@ const offers = express.Router();
 const mongoose = require("mongoose");
 const Offer = require("../models/Offer");
 
-//GET Create an endpoint to retrieve all offers
+//GET Create an endpoint to retrieve all available offers
 offers.get("/", (req, res) => {
-  Offer.find({ })
+  Offer.find({ isAvailable: true })
+    .sort({ createdAt: -1 })
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err));
+});
+
+//GET Create an endpoint to retrieve all available and unavailable offers
+offers.get("/alloffers", (req, res) => {
+  Offer.find({})
+    .sort({ createdAt: -1 })
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
 });
@@ -30,30 +39,30 @@ offers.get("/:id", (req, res) => {
 //UPDATE Create an endpoint to create a new offer
 offers.post("/", (req, res) => {
   const {
+    userId,
     offerName,
-    latitude,
-    longitude,
     street,
     city,
-    postalCode,
-    startAvailableDate,
-    endAvailableDate,
+    country,
     offerSize,
-    pricePerHour,
+    price,
+    availableFrom,
+    availableUntil,
     isAvailable,
+    createdAt,
   } = req.body;
   Offer.create({
+    userId,
     offerName,
-    latitude,
-    longitude,
     street,
     city,
-    postalCode,
-    startAvailableDate,
-    endAvailableDate,
+    country,
     offerSize,
-    pricePerHour,
+    price,
+    availableFrom,
+    availableUntil,
     isAvailable,
+    createdAt,
   })
     .then((data) => res.json(data))
     .catch((e) => {
@@ -79,7 +88,9 @@ offers.delete("/:id", (req, res) => {
     });
 });
 
-//UPDATE/PUT Create an endpoint to update an offer based on id
+
+
+// UPDATE/PUT Create an endpoint to update an offer based on id
 offers.put("/:id", (req, res) => {
   const id = req.params.id;
   const { startAvailableDate, endAvailableDate, pricePerHour } = req.body;
