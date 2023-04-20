@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const booking = require("../models/booking");
+const Offer = require("../models/Offer");
 
 // //GET Create an endpoint to retrieve all bookings
 router.get("/", (req, res) => {
@@ -12,6 +13,29 @@ router.get("/", (req, res) => {
 });
 
 // Post an endpoint that creates a new booking in bookings collections
+
+// router.post("/", (req, res) => {
+//   const { user_id, spot_id, start_time, end_time, booking_status, total_cost } =
+//     req.body;
+
+//   // Create a new booking
+//   booking
+//     .create({
+//       user_id,
+//       spot_id,
+//       start_time,
+//       end_time,
+//       booking_status,
+//       total_cost,
+//     })
+//     .then((data) => {
+//       // Find the offer and delete it
+//       return Offer.findByIdAndDelete(spot_id).then(() => data);
+//     })
+//     .then((data) => res.json(data))
+//     .catch((err) => console.log(err));
+// });
+
 router.post("/newBooking", (req, res) => {
   const { user_id, spot_id, start_time, end_time, booking_status, total_cost } =
     req.body;
@@ -42,18 +66,18 @@ router.get("/:status", (req, res) => {
       res.sendStatus(500);
     });
 });
-// router.get("/pending", (req, res) => {
-//   const filter = { booking_status: "pending" };
-//   booking
-//     .find(filter)
-//     .then((data) => {
-//       res.json(data);
-//     })
-//     .catch((err) => {
-//       console.log(err.message);
-//       res.sendStatus(500);
-//     });
-// });
+router.get("/pending", (req, res) => {
+  const filter = { booking_status: "pending" };
+  booking
+    .find(filter)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res.sendStatus(500);
+    });
+});
 
 //GET an endpoint to retrieve a specific booking based on booking id
 router.get("/:id", (req, res) => {
